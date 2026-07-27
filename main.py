@@ -1,3 +1,7 @@
+from file_manager import FileManager
+
+fm = FileManager()
+
 print("=" * 40)
 print("      SMART FILE MANAGER")
 print("=" * 40)
@@ -6,21 +10,21 @@ print("1.Search File\n2.Rename File \n3.Move File\n4.Delete File\n5.Recover File
 
 x=int(input("Enter Your Choice: "))
 if (x==1):
-	print("\nSearch File Selected")
+	fm.search_file()
 elif(x==2):
-	print("\nRename File")
+	fm.rename_file()
 elif(x==3):
-	print("\nMove File")
+	fm.move_file()
 elif(x==4):
-	print("\nDelete File")
+	fm.delete_file()
 elif(x==5):
-	print("\nRecover File")
+	fm.recover_file()
 elif(x==6):
-	print("\nCompress File")
+	fm.compress_file()
 elif(x==7):
-	print("\nFind Duplicate Files")
+	fm.find_duplicates()
 elif(x==8):
-	print("\nThank you for using Smart File Manager!")
+	fm.exit()
 else:
     print("\nInvalid")
 
