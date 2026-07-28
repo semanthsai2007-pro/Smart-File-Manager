@@ -5,10 +5,22 @@ class FileManager:
         folder = input("Enter Folder Path: ")
         filename = input("Enter File Name: ")
 
-        print("\nFolder Path: ",folder)
-        print("\nSearching for: ",filename)
-        for root,dirs,files in os.walk(folder):
-            print(files)
+        print("\nFolder Path:", folder)
+        print("\nSearching for:", filename)
+
+        found = False
+
+        for root, dirs, files in os.walk(folder):
+            for file in files:
+                if filename == file:
+                    found = True
+                    print(os.path.join(root, file))
+                    break
+            if found:
+                    break
+
+        if not found:
+            print("File Not Found")
 
     def rename_file(self):
         print("Rename Module Opened")
