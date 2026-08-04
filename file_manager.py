@@ -1,4 +1,5 @@
 import os
+import shutil
 
 class FileManager:
     def search_file(self):
@@ -57,7 +58,32 @@ class FileManager:
             print("\nFile Not Found")
 
     def move_file(self):
-        print("Move Module Opened")
+        folder = input("Enter Folder Path: ")
+        filename = input("Enter File name: ")
+        destination = input("Enter Destination Folder: ")
+
+        print("\nFolder:", folder)
+        print("File:", filename)
+        print("Destination:", destination)
+
+        found = False
+
+        for root, dirs, files in os.walk(folder):
+            for file in files:
+                if filename == file:
+                    found = True
+                    old_path = os.path.join(root, file)
+                    try:
+                        shutil.move(old_path, destination)
+                        print("File Moved Successfully!")
+
+                    except Exception as e:
+                        print("Error:", e)
+                    break
+            if found:
+                break
+        if not found:
+            print("File not found")
 
     def delete_file(self):
         print("Delete Module Opened")
