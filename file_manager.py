@@ -86,7 +86,30 @@ class FileManager:
             print("File not found")
 
     def delete_file(self):
-        print("Delete Module Opened")
+        folder = input("Enter Folder Path: ")
+        filename = input("Enter File Name: ")
+
+        print("\nFolder:", folder)
+        print("File:", filename)
+        destination = "recycle_bin"
+        found = False
+        
+        for root, dirs, files in os.walk(folder):
+            for file in files:
+                if filename == file:
+                    found = True
+                    old_path = os.path.join(root, file)
+                    try:
+                        shutil.move(old_path, destination)
+                        print("File Deleted Successfully!")
+        
+                    except Exception as e:
+                        print("Error:", e)
+                    break
+            if found:
+                break
+        if not found:
+            print("File not found")
 
     def recover_file(self):
         print("Recover Module Opened")
