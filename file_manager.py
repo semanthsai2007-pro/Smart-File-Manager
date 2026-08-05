@@ -112,10 +112,54 @@ class FileManager:
             print("File not found")
 
     def recover_file(self):
-        print("Recover Module Opened")
+        filename = input("Enter File Name: ")
+        destination = input("Enter Recovery Folder: ")
+
+        folder = "recycle_bin"
+
+        print("\nRecycle Bin:", folder)
+        print("File:", filename)
+        print("Recovery Folder:", destination)
+
+        found = False
+
+        for root, dirs, files in os.walk(folder):
+            for file in files:
+                if filename == file:
+                    found = True
+
+                    old_path = os.path.join(root, file)
+
+                    try:
+                        shutil.move(old_path, destination)
+                        print("File Recovered Successfully!")
+
+                    except Exception as e:
+                        print("Error:", e)
+
+                    break
+
+            if found:
+                break
+
+        if not found:
+            print("File Not Found")
 
     def compress_file(self):
-        print("Compress Module Opened")
+        folder = input("Enter Folder Path: ")
+
+        if not os.path.exists(folder):
+            print("Folder Not Found")
+            return
+
+        zip_name = os.path.basename(folder)
+
+        try:
+            shutil.make_archive(zip_name, "zip", folder)
+            print("Folder Compressed Successfully!")
+
+        except Exception as e:
+            print("Error:", e)
 
     def find_duplicates(self):
         print("Duplicate Finder Module Opened")
