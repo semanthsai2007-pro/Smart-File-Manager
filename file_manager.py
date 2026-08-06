@@ -162,7 +162,29 @@ class FileManager:
             print("Error:", e)
 
     def find_duplicates(self):
-        print("Duplicate Finder Module Opened")
+        folder = input("Enter Folder Path: ")
+
+        if not os.path.exists(folder):
+            print("Folder Not Found")
+            return
+
+        duplicates = {}
+
+        for root, dirs, files in os.walk(folder):
+            for file in files:
+
+                file_path = os.path.join(root, file)
+
+                with open(file_path, "rb") as f:
+                    content = f.read()
+
+                if content in duplicates:
+                    print("\nDuplicate Found!")
+                    print("Original :", duplicates[content])
+                    print("Duplicate:", file_path)
+
+                else:
+                    duplicates[content] = file_path
 
     def exit(self):
         print("Exiting The File")
